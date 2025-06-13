@@ -1,28 +1,74 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { AlertTriangle, CheckCircle, Wrench, Loader2, Brain } from "lucide-react";
-import { diagnoseCarProblem, DiagnosisResult } from "@/utils/carDiagnostics";
+
+interface DiagnosisResult {
+  possibleProblem: string;
+  suggestedAction: string;
+  severity: "low" | "medium" | "high";
+  confidence: number;
+}
+
+const OPENAI_API_KEY = "YOUR_OPENAI_API_KEY"; // Replace with your real key or load from env securely
 
 const DiagnosisForm = () => {
   const [problem, setProblem] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState<DiagnosisResult | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!problem.trim()) return;
 
     setIsLoading(true);
-    
-    // Simulate AI processing time
-    setTimeout(() => {
-      const diagnosis = diagnoseCarProblem(problem.trim());
+    setError(null);
+    setResult(null);
+
+    try {
+      // Call OpenAI API
+      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${OPENAI_API_KEY}`,
+        },
+        body: JSON.stringify({
+          model: "gpt-4o-mini", // or "gpt-4o", "gpt-4", "gpt-3.5-turbo"
+          messages: [
+            {
+              role: "system",
+              content: "You are an expert car mechanic. Diagnose car problems from the user description and respond with a JSON object containing possibleProblem, suggestedAction, severity (low, medium, or high), and confidence (0-100). Only respond with JSON."
+            },
+            {
+              role: "user",
+              content: problem.trim()
+            }
+          ],
+          temperature: 0.3,
+          max_tokens: 300,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`OpenAI API error: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+
+      const textResponse = data.choices[0].message.content;
+
+      // Try to parse the JSON response from AI
+      const diagnosis: DiagnosisResult = JSON.parse(textResponse);
+
       setResult(diagnosis);
+    } catch (err: any) {
+      setError(err.message || "Something went wrong.");
+    } finally {
       setIsLoading(false);
-    }, 1500);
+    }
   };
 
   const getSeverityIcon = (severity: string) => {
@@ -101,6 +147,10 @@ const DiagnosisForm = () => {
           </form>
         </CardContent>
       </Card>
+
+      {error && (
+        <div className="text-center text-red-600 font-semibold mt-4">{error}</div>
+      )}
 
       {result && (
         <Card className={`border-2 animate-fade-in ${getSeverityColor(result.severity)}`}>
