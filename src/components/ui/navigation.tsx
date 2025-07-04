@@ -1,3 +1,4 @@
+
 import * as React from "react"
 import * as MenubarPrimitive from "@radix-ui/react-menubar"
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu"
@@ -6,7 +7,7 @@ import { Slot } from "@radix-ui/react-slot"
 import { VariantProps, cva } from "class-variance-authority"
 import { Check, ChevronRight, Circle, ChevronDown, X, PanelLeft } from "lucide-react"
 import { useIsMobile } from "@/hooks"
-import { cn } from "@/utils"
+import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/buttons"
 import { Input } from "@/components/ui/inputs"
 import { Separator } from "@/components/ui/separator"

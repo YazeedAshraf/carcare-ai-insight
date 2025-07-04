@@ -1,10 +1,9 @@
-
 import * as React from "react"
 import * as ToastPrimitives from "@radix-ui/react-toast"
 import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog"
 import { cva, type VariantProps } from "class-variance-authority"
 import { X, AlertTriangle } from "lucide-react"
-import { cn } from "@/utils"
+import { cn } from "@/lib/utils"
 import { useToast } from "@/hooks"
 import { Button } from "@/components/ui/buttons"
 

@@ -3,7 +3,7 @@ import * as TogglePrimitive from "@radix-ui/react-toggle"
 import * as ToggleGroupPrimitive from "@radix-ui/react-toggle-group"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
-import { cn } from "@/utils"
+import { cn } from "@/lib/utils"
 
 // Button Component
 const buttonVariants = cva(

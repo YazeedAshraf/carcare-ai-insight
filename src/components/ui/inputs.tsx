@@ -3,7 +3,7 @@ import * as SelectPrimitive from "@radix-ui/react-select"
 import * as SwitchPrimitive from "@radix-ui/react-switch"
 import { OTPInput, OTPInputContext } from "input-otp"
 import { Check, ChevronDown, ChevronUp, Dot } from "lucide-react"
-import { cn } from "@/utils"
+import { cn } from "@/lib/utils"
 
 // Input Component
 const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
