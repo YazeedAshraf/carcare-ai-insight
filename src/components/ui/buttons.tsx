@@ -1,3 +1,4 @@
+
 import * as React from "react"
 import * as TogglePrimitive from "@radix-ui/react-toggle"
 import * as ToggleGroupPrimitive from "@radix-ui/react-toggle-group"
@@ -125,6 +126,7 @@ ToggleGroupItem.displayName = ToggleGroupPrimitive.Item.displayName
 export { 
   Button, 
   buttonVariants,
+  type ButtonProps,
   Toggle,
   toggleVariants,
   ToggleGroup,
