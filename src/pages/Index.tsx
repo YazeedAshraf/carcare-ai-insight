@@ -10,7 +10,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { useToast } from "@/hooks/use-toast";
+import { useToast } from "@/hooks";
 import { 
   Car, 
   AlertTriangle, 

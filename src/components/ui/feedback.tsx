@@ -1,3 +1,4 @@
+
 import * as React from "react"
 import * as ToastPrimitives from "@radix-ui/react-toast"
 import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog"
@@ -167,8 +168,8 @@ const ToastDescription = React.forwardRef<
 ))
 ToastDescription.displayName = ToastPrimitives.Description.displayName
 
-// Toaster Component
-export function Toaster() {
+// Fixed: Single Toaster Component export
+function FeedbackToaster() {
   const { toasts } = useToast()
 
   return (
@@ -330,7 +331,7 @@ export {
   ToastDescription,
   ToastClose,
   ToastAction,
-  Toaster,
+  FeedbackToaster as Toaster,
   
   // Alert Dialog exports
   AlertDialog,
