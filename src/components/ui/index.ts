@@ -9,3 +9,8 @@ export * from './buttons'
 // Re-export remaining individual components that weren't grouped
 export * from './skeleton'
 export * from './separator'
+export * from './calendar'
+export * from './carousel'
+export * from './pagination'
+export * from './alert-dialog'
+export * from './sidebar'
